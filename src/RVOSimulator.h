@@ -351,6 +351,15 @@ namespace RVO {
 		float getAgentTimeHorizonObst(size_t agentNo) const;
 
 		/**
+		 * \brief      Returns the alpha value (to be used for computing  
+		 * 			   generalized velocity obstacles) of a specified agent.
+		 * \param      agentNo         The number of the agent whose alpha value
+		 * 							   is to be retrieved.
+		 * \return     The alpha value of the agent.
+		 */
+		float getAgentAlpha(size_t agentNo) const;
+
+		/**
 		 * \brief      Returns the two-dimensional linear velocity of a
 		 *             specified agent.
 		 * \param      agentNo         The number of the agent whose
@@ -556,6 +565,15 @@ namespace RVO {
 		 *                             obstacles. Must be positive.
 		 */
 		void setAgentTimeHorizonObst(size_t agentNo, float timeHorizonObst);
+
+		/**
+		 * \brief      Sets the alpha value of a specified agent.
+		 * \param      agentNo         The number of the agent whose alpha value
+		 * 							   is to be modified.
+		 * \param      alpha 		   The replacement alpha value. Must be 
+		 * 							   positive.
+		 */
+		void setAgentAlpha(size_t agentNo, float timeHorizonObst);
 
 		/**
 		 * \brief      Sets the two-dimensional linear velocity of a specified

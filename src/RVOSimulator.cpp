@@ -252,6 +252,11 @@ namespace RVO {
 		return agents_[agentNo]->timeHorizonObst_;
 	}
 
+	float RVOSimulator::getAgentAlpha(size_t agentNo) const
+	{
+		return agents_[agentNo]->alpha_;
+	}
+
 	const Vector2 &RVOSimulator::getAgentVelocity(size_t agentNo) const
 	{
 		return agents_[agentNo]->velocity_;
@@ -355,6 +360,11 @@ namespace RVO {
 	void RVOSimulator::setAgentTimeHorizonObst(size_t agentNo, float timeHorizonObst)
 	{
 		agents_[agentNo]->timeHorizonObst_ = timeHorizonObst;
+	}
+
+	void RVOSimulator::setAgentAlpha(size_t agentNo, float alpha)
+	{
+		agents_[agentNo]->alpha_ = alpha;
 	}
 
 	void RVOSimulator::setAgentVelocity(size_t agentNo, const Vector2 &velocity)

@@ -99,6 +99,7 @@ namespace RVO {
 		RVOSimulator *sim_;
 		float timeHorizon_;
 		float timeHorizonObst_;
+		float alpha_; // priority level of agent
 		Vector2 velocity_;
 
 		size_t id_;

@@ -36,7 +36,7 @@
 #include "Obstacle.h"
 
 namespace RVO {
-	Agent::Agent(RVOSimulator *sim) : maxNeighbors_(0), maxSpeed_(0.0f), neighborDist_(0.0f), radius_(0.0f), sim_(sim), timeHorizon_(0.0f), timeHorizonObst_(0.0f), id_(0) { }
+	Agent::Agent(RVOSimulator *sim) : maxNeighbors_(0), maxSpeed_(0.0f), neighborDist_(0.0f), radius_(0.0f), sim_(sim), timeHorizon_(0.0f), timeHorizonObst_(0.0f), alpha_(0.5f), id_(0) { }
 
 	void Agent::computeNeighbors()
 	{
@@ -298,9 +298,17 @@ namespace RVO {
 			Line line;
 			Vector2 u;
 
+			/* Compute the priority value, alpha */
+			const float alpha_sum = alpha_ + other->alpha_;
+			float alpha = 0.5f;
+
+			/* Update alpha only when the velocity obstacle is active */
+			if (alpha_sum > 0.0f) {alpha = alpha_ / alpha_sum;}
+
 			if (distSq > combinedRadiusSq) {
 				/* No collision. */
 				const Vector2 w = relativeVelocity - invTimeHorizon * relativePosition;
+
 				/* Vector from cutoff center to relative velocity. */
 				const float wLengthSq = absSq(w);
 
@@ -346,7 +354,8 @@ namespace RVO {
 				u = (combinedRadius * invTimeStep - wLength) * unitW;
 			}
 
-			line.point = velocity_ + 0.5f * u;
+			// line.point = velocity_ + 0.5f * u;
+			line.point = velocity_ + (1.0f - alpha) * u;
 			orcaLines_.push_back(line);
 		}
 
